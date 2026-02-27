@@ -1,0 +1,14 @@
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\lesson1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\lesson1.AssemblyInfoInputs.cache
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\lesson1.AssemblyInfo.cs
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\lesson1.csproj.CoreCompileInputs.cache
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\bin\Debug\net9.0\lesson1.exe
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\bin\Debug\net9.0\lesson1.deps.json
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\bin\Debug\net9.0\lesson1.runtimeconfig.json
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\bin\Debug\net9.0\lesson1.dll
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\bin\Debug\net9.0\lesson1.pdb
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\lesson1.dll
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\refint\lesson1.dll
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\lesson1.pdb
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\lesson1.genruntimeconfig.cache
+C:\Users\lFJl\source\repos\seniorArquitecture\variables_datatypes_operators\csharptraining\lesson1\obj\Debug\net9.0\ref\lesson1.dll

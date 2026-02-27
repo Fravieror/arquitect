@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "variables_datatypes_operators", "variables_datatypes_operators", "{4A3E1718-AE28-736F-7711-351B35CDAAED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "csharptraining", "csharptraining", "{34090F6C-E707-19AC-0FC9-6A559BC2D184}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lesson1", "variables_datatypes_operators\csharptraining\lesson1\lesson1.csproj", "{22E978C3-D3FD-F339-A826-20529A143EFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22E978C3-D3FD-F339-A826-20529A143EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E978C3-D3FD-F339-A826-20529A143EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E978C3-D3FD-F339-A826-20529A143EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E978C3-D3FD-F339-A826-20529A143EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{34090F6C-E707-19AC-0FC9-6A559BC2D184} = {4A3E1718-AE28-736F-7711-351B35CDAAED}
+		{22E978C3-D3FD-F339-A826-20529A143EFA} = {34090F6C-E707-19AC-0FC9-6A559BC2D184}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C082594-6ADE-4184-8AA4-410DF52A4F82}
+	EndGlobalSection
+EndGlobal
