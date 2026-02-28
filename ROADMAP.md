@@ -7,10 +7,10 @@
 ## 📚 PHASE 1: FOUNDATIONS (Weeks 1-4)
 
 ### 1.1 Programming Fundamentals
-- [ ] Variables, Data Types, and Operators
-- [ ] Control Flow (if/else, switch, loops)
-- [ ] Functions and Methods
-- [ ] Error Handling and Exceptions
+- [✅] Variables, Data Types, and Operators
+- [✅] Control Flow (if/else, switch, loops)
+- [✅] Functions and Methods
+- [✅] Error Handling and Exceptions
 - [ ] Memory Management (Stack vs Heap)
 - [ ] Recursion
 

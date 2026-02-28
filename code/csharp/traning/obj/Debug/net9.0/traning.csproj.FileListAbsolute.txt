@@ -1,0 +1,14 @@
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\traning.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\traning.AssemblyInfoInputs.cache
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\traning.AssemblyInfo.cs
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\traning.csproj.CoreCompileInputs.cache
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\traning.dll
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\traning.pdb
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\bin\Debug\net9.0\traning.exe
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\bin\Debug\net9.0\traning.deps.json
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\bin\Debug\net9.0\traning.runtimeconfig.json
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\bin\Debug\net9.0\traning.dll
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\bin\Debug\net9.0\traning.pdb
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\refint\traning.dll
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\traning.genruntimeconfig.cache
+C:\Users\lFJl\source\repos\senior_arquitecture\code\csharp\traning\obj\Debug\net9.0\ref\traning.dll
