@@ -8,20 +8,20 @@
 
 ### 1.1 Programming Fundamentals
 - [✅] Variables, Data Types, and Operators
-- [✅] Control Flow (if/else, switch, loops)
-- [✅] Functions and Methods
-- [✅] Error Handling and Exceptions
-- [ ] Memory Management (Stack vs Heap)
+- [in-progress] Control Flow (if/else, switch, loops)
+- [] Functions and Methods
+- [] Error Handling and Exceptions
+- [✅] Memory Management (Stack vs Heap)
 - [ ] Recursion
 
 ### 1.2 Object-Oriented Programming (OOP)
-- [ ] Classes and Objects
-- [ ] Encapsulation
-- [ ] Inheritance
-- [ ] Polymorphism
-- [ ] Abstraction
+- [✅] Classes and Objects
+- [✅] Encapsulation
+- [✅] Inheritance
+- [✅] Polymorphism
+- [✅] Abstraction
 - [ ] Interfaces vs Abstract Classes
-- [ ] Composition vs Inheritance
+- [✅] Composition vs Inheritance
 
 ### 1.3 Data Structures
 - [ ] Arrays and Lists
@@ -103,12 +103,21 @@
 - [ ] Actor Model
 - [ ] Future/Promise
 
+### 3.5 Most Commonly Used Patterns in Production
+- [ ] Factory Method
+- [ ] Strategy
+- [ ] Observer
+- [ ] Decorator
+- [ ] Adapter
+- [ ] Facade
+- [ ] Command
+- [ ] Singleton
 ---
 
 ## 🏗️ PHASE 4: ARCHITECTURAL PATTERNS (Weeks 13-18)
 
 ### 4.1 Monolithic Architecture
-- [ ] Layered Architecture (N-Tier)
+- [in-progess] Layered Architecture (N-Tier)
 - [ ] Clean Architecture
 - [ ] Hexagonal Architecture (Ports & Adapters)
 - [ ] Onion Architecture
@@ -225,7 +234,7 @@
 ## 🤖 PHASE 8: AGENTIC & AI ARCHITECTURES (Weeks 31-35)
 
 ### 8.1 AI/ML Architecture Patterns
-- [ ] Model-as-a-Service
+- [in-progress] Model-as-a-Service
 - [ ] ML Pipeline Architecture
 - [ ] Feature Store Pattern
 - [ ] Model Registry
@@ -236,15 +245,15 @@
 - [ ] Single Agent Architecture
 - [ ] Multi-Agent Systems (MAS)
 - [ ] Agent Orchestration Patterns
-  - [ ] Sequential Agents
-  - [ ] Parallel Agents
-  - [ ] Hierarchical Agents
-  - [ ] Collaborative Agents
+- [ ] Sequential Agents
+- [ ] Parallel Agents
+- [ ] Hierarchical Agents
+- [ ] Collaborative Agents
 - [ ] Tool-Using Agents
 - [ ] Memory Systems for Agents
-  - [ ] Short-term Memory
-  - [ ] Long-term Memory
-  - [ ] Episodic Memory
+- [ ] Short-term Memory
+- [ ] Long-term Memory
+- [ ] Episodic Memory
 - [ ] Agent Communication Protocols
 - [ ] ReAct Pattern (Reasoning + Acting)
 - [ ] Chain of Thought
