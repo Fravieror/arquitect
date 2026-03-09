@@ -20,14 +20,14 @@
 - [✅] Inheritance
 - [✅] Polymorphism
 - [✅] Abstraction
-- [ ] Interfaces vs Abstract Classes
+- [] Interfaces vs Abstract Classes
 - [✅] Composition vs Inheritance
 
 ### 1.3 Data Structures
-- [ ] Arrays and Lists
-- [ ] Stacks and Queues
-- [ ] Hash Tables / Dictionaries
-- [ ] Trees (Binary, BST, AVL)
+- [✅] Arrays and Lists
+- [✅] Stacks and Queues
+- [✅] Hash Tables / Dictionaries
+- [✅] Trees (Binary, BST, AVL)
 - [ ] Graphs
 - [ ] Heaps
 - [ ] Linked Lists
