@@ -28,7 +28,7 @@
 - [✅] Stacks and Queues
 - [✅] Hash Tables / Dictionaries
 - [✅] Trees (Binary, BST, AVL)
-- [ ] Graphs
+- [✅] Graphs
 - [ ] Heaps
 - [ ] Linked Lists
 
@@ -47,7 +47,7 @@
 ### 2.1 The SOLID Principles
 - [ ] **S** - Single Responsibility Principle (SRP)
 - [ ] **O** - Open/Closed Principle (OCP)
-- [ ] **L** - Liskov Substitution Principle (LSP)
+- [✅] **L** - Liskov Substitution Principle (LSP)
 - [ ] **I** - Interface Segregation Principle (ISP)
 - [ ] **D** - Dependency Inversion Principle (DIP)
 
@@ -56,8 +56,8 @@
 - [ ] KISS (Keep It Simple, Stupid)
 - [ ] YAGNI (You Aren't Gonna Need It)
 - [ ] Separation of Concerns
-- [ ] Law of Demeter
-- [ ] Composition Over Inheritance
+- [✅] Law of Demeter
+- [] Composition Over Inheritance
 - [ ] Program to Interface, Not Implementation
 
 ---
@@ -66,11 +66,11 @@
 
 ### 3.1 Creational Patterns
 - [ ] Singleton
-- [ ] Factory Method
+- [✅] Factory Method
 - [ ] Abstract Factory
 - [ ] Builder
 - [ ] Prototype
-- [ ] Object Pool
+- [✅] Object Pool
 - [ ] Dependency Injection
 
 ### 3.2 Structural Patterns
