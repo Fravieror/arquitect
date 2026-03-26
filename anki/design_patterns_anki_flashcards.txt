@@ -1,3 +1,8 @@
+#separator:tab
+#html:false
+#notetype:Basic
+#deck:Design Patterns
+
 What are Design Patterns in software engineering?	Design Patterns are reusable solutions to common problems in software design. Think of them like blueprints — not finished code, but proven templates for solving recurring challenges. They were popularized by the "Gang of Four" (GoF) book in 1994. Senior insight: patterns are a communication tool first. Saying "use a Strategy here" is faster than explaining the whole approach. But don't force patterns where simple code works — that's called "pattern fever."
 What are the three main categories of GoF Design Patterns?	1) Creational — how objects are created. 2) Structural — how objects are composed/connected. 3) Behavioral — how objects communicate and share responsibilities. Analogy: Creational = how you build LEGO pieces, Structural = how you snap them together, Behavioral = what the assembled structure does.
 What is the difference between a Design Pattern and an Anti-Pattern?	A Design Pattern solves a recurring problem well. An Anti-Pattern is a common "solution" that actually makes things worse. Example anti-pattern: God Object (one class that does everything). Senior insight: many anti-patterns start as patterns applied in the wrong context. Singleton is a pattern, but overusing it becomes the "Singletonitis" anti-pattern.

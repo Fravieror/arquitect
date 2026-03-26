@@ -1,7 +1,7 @@
 #separator:tab
 #html:false
 #notetype:Basic
-#deck:Senior Architect::Architectural Patterns
+#deck:Architectural Patterns
 
 What is a Monolithic Architecture?	A monolithic app is one big unit where all features live together in a single deployable package. Think of it like a Swiss Army knife — everything is in one tool. The database, UI, business logic, and APIs all run as one process. Simple to start, but as it grows, changing one part risks breaking others.
 
