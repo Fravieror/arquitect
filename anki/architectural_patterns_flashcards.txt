@@ -1,0 +1,182 @@
+#separator:tab
+#html:false
+#notetype:Basic
+#deck:Senior Architect::Architectural Patterns
+
+What is a Monolithic Architecture?	A monolithic app is one big unit where all features live together in a single deployable package. Think of it like a Swiss Army knife — everything is in one tool. The database, UI, business logic, and APIs all run as one process. Simple to start, but as it grows, changing one part risks breaking others.
+
+What are the main advantages of Monolithic Architecture?	1. Simple to develop and deploy — one codebase, one deployment. 2. Easy debugging — everything is in one place. 3. No network latency between components. 4. Works great for small teams and early-stage products. 5. Lower operational complexity (no distributed systems headaches).
+
+What are the main disadvantages of Monolithic Architecture?	1. Scaling means scaling the whole app, even if only one feature is under load. 2. A bug in one module can crash everything. 3. Long build/test/deploy cycles as the app grows. 4. Hard for large teams to work in parallel without conflicts. 5. Tech stack is locked — you can't use Python for one part and Go for another.
+
+When should you choose Monolithic over Microservices?	Choose Monolith when: 1. Your team is small (< 10 devs). 2. The domain is not yet well understood. 3. Speed to market matters more than scalability. 4. You don't have DevOps capacity for distributed systems. Mistake: jumping to microservices on day 1 — premature decomposition is painful and expensive.
+
+What is the "Modular Monolith" pattern?	A modular monolith splits the codebase into well-defined internal modules with clear boundaries (like packages/namespaces), but still deploys as one unit. Think of it as apartment buildings in one complex vs. scattered houses. Each module owns its data and logic. This is a great stepping stone before going to microservices.
+
+What is the Strangler Fig pattern?	A migration strategy where you gradually replace parts of a monolith with new services, one feature at a time. Like a strangler fig vine that slowly wraps a tree — the new system grows around the old one until the old one is replaced. Avoids the "big rewrite" risk.
+
+What is a Layered (N-Tier) Architecture in a Monolith?	The app is divided into horizontal layers: Presentation → Business Logic → Data Access → Database. Each layer only talks to the one below it. Simple and well-understood, but can lead to "anemic domain models" where logic leaks into the wrong layer.
+
+What is the difference between horizontal and vertical scaling?	Horizontal scaling = add more machines (scale out). Vertical scaling = use a bigger machine (scale up). Monoliths typically scale vertically or by running multiple identical copies. Microservices allow horizontal scaling of individual services independently.
+
+What performance concern is unique to Monolithic Architecture?	A monolith shares memory, CPU, and threads across all features. One slow or memory-hungry feature (e.g., a heavy report) can degrade the entire application. Solution: background jobs, caching, and async processing within the monolith.
+
+What is Distributed Architecture?	An architecture where the system is split into multiple independent services that communicate over a network. Each service runs in its own process, can be deployed separately, and can use different technologies. Think of it like a city where each neighborhood specializes in something — restaurants, hospitals, schools — and they cooperate to function.
+
+What is a Microservices Architecture?	A style of distributed architecture where the application is composed of small, independently deployable services, each responsible for a specific business capability. Each service has its own database, its own deployment pipeline, and communicates via APIs or messages. Example: Netflix has hundreds of microservices (user service, recommendations service, billing service, etc.).
+
+What are the main benefits of Microservices?	1. Independent deployability — update one service without touching others. 2. Independent scalability — scale only what's under load. 3. Technology flexibility — use Python for ML service, Go for high-performance API. 4. Fault isolation — one service failing doesn't crash the whole system. 5. Smaller codebases are easier for focused teams.
+
+What are the main challenges of Microservices?	1. Network latency and failures between services. 2. Distributed transactions are hard. 3. Debugging across services requires distributed tracing. 4. Data consistency is complex — each service has its own DB. 5. More infrastructure to manage (dozens of deployments, logs, configs). 6. "Death by a thousand microservices" — too many creates chaos.
+
+What is Service Discovery in Distributed Systems?	Services need to find each other dynamically since their IPs can change (containers restart, scale up/down). Service Discovery is the mechanism for this. Examples: DNS-based (Kubernetes Services), registry-based (Consul, Eureka). Think of it like a phone book that updates itself automatically.
+
+What is the CAP Theorem?	In a distributed system, you can only guarantee 2 of these 3 properties at the same time: Consistency (all nodes see the same data), Availability (every request gets a response), Partition Tolerance (system works even if network splits). Since network partitions always happen, you choose between CP (consistent but may be unavailable) or AP (available but may be stale). Example: banking = CP. Social media feed = AP.
+
+What is the difference between CP and AP systems?	CP systems (e.g., HBase, Zookeeper) prioritize consistency over availability — during a partition, they refuse requests rather than return stale data. AP systems (e.g., DynamoDB, Cassandra) stay available during partitions but may return stale data. Choose based on what failure mode your business can tolerate.
+
+What is Eventual Consistency?	A consistency model where, given no new updates, all replicas of data will eventually converge to the same value. It's a trade-off for higher availability. Example: if you post a tweet, not everyone sees it at the exact same millisecond — but eventually everyone will. Common in DNS, shopping carts, social feeds.
+
+What is a Service Mesh?	Infrastructure that handles service-to-service communication — retries, timeouts, load balancing, encryption, observability — transparently, without changing application code. Examples: Istio, Linkerd. Think of it as a smart network layer between services. Senior insight: adds complexity — use when you have many services with cross-cutting communication concerns.
+
+What is the Sidecar pattern?	Attach a helper container/process alongside your service to handle cross-cutting concerns (logging, auth, proxying) without modifying the service code. Used heavily in service meshes (e.g., Envoy as sidecar). Analogy: a motorcycle sidecar — same journey, separate seat.
+
+What is the API Gateway pattern?	A single entry point for all client requests that routes to appropriate backend services. It handles authentication, rate limiting, SSL termination, request aggregation. Example: AWS API Gateway, Kong. Prevents clients from calling dozens of services directly. Common mistake: putting too much business logic into the gateway.
+
+What is the Backend for Frontend (BFF) pattern?	A separate backend service tailored to a specific frontend client (mobile app, web app, third-party). Instead of one generic API, each client gets an API optimized for its needs. Useful when mobile needs different data shapes than web. Avoids over-fetching and under-fetching.
+
+What is the Circuit Breaker pattern?	Prevents a failing service from being called repeatedly. When failures exceed a threshold, the circuit "opens" and fast-fails requests for a cooldown period, then tests recovery. Like a fuse box — it trips to protect the rest of the system. Libraries: Polly (.NET), Resilience4j (Java), Hystrix (Java, deprecated).
+
+What is the Bulkhead pattern?	Isolates failures by partitioning resources (thread pools, connections) per service/feature. If one service consumes all threads, others are not affected. Named after ship compartments that prevent the whole vessel from sinking if one section floods. Prevents cascading failures.
+
+What is the Saga pattern?	A way to manage distributed transactions across multiple services without a single ACID transaction. Each step in the saga publishes an event or calls the next service. If a step fails, compensating transactions undo prior steps. Two types: Choreography (event-driven, services react) and Orchestration (a central saga orchestrator directs steps).
+
+What is the difference between Choreography and Orchestration in Sagas?	Choreography: services react to events published by other services — decentralized, no coordinator. Like jazz musicians improvising. Orchestration: a central orchestrator service tells each service what to do step by step. Like a conductor. Choreography scales better but is harder to debug. Orchestration is easier to visualize but adds coupling to the orchestrator.
+
+What are common distributed system failure modes?	1. Network partition (split brain). 2. Cascading failures (one slow service overwhelms others). 3. Clock skew (servers have different times). 4. Idempotency bugs (duplicate requests cause double processing). 5. Partial failures (some nodes up, some down). Senior tip: design for failure — assume the network WILL fail, not "if it fails."
+
+What is idempotency and why does it matter in distributed systems?	An operation is idempotent if calling it multiple times has the same effect as calling it once. Critical in distributed systems because requests can be retried after failures. Example: charging a credit card must be idempotent — retrying should not double-charge. Implement with idempotency keys per request.
+
+What is the difference between synchronous and asynchronous communication in distributed systems?	Synchronous: caller waits for a response (REST, gRPC). Tight coupling, simpler flow, but caller is blocked. Asynchronous: caller sends a message and continues without waiting (message queues, events). Looser coupling, better resilience, but harder to debug and trace. Senior rule: prefer async for long-running or non-critical operations; sync for real-time queries.
+
+What is a message queue and why use one?	A queue that holds messages between a producer (sender) and consumer (receiver), decoupling them in time. The producer doesn't need the consumer to be available. Examples: RabbitMQ, AWS SQS, Azure Service Bus. Use cases: order processing, email sending, background jobs. Key trade-off: adds eventual consistency.
+
+What is an event broker vs a message queue?	A message queue delivers a message to ONE consumer (point-to-point). An event broker (like Kafka, AWS EventBridge) distributes events to MULTIPLE consumers (publish-subscribe). Use queues for task delegation, brokers for broadcasting events across many services. Kafka also persists events for replay — queues typically delete after consumption.
+
+What is the Outbox Pattern?	Ensures that database writes and message publishing are atomic — even if the message broker is down. Write the message to an "outbox" table in the same DB transaction as your data change. A separate process reads the outbox and publishes messages. Prevents the dual-write problem: "data saved but event never published."
+
+What is the Two-Phase Commit (2PC) and why is it problematic?	2PC is a protocol to achieve atomic commits across distributed systems: Phase 1 (Prepare) — all nodes agree they can commit. Phase 2 (Commit) — coordinator tells all nodes to commit. Problem: if the coordinator fails between phases, nodes are left in a blocked state. Poor performance due to locking. Use Sagas instead for long-lived distributed transactions.
+
+What is CQRS?	Command Query Responsibility Segregation — separates read and write models into different code paths (and often different data stores). Writes go through Commands that change state. Reads go through Queries that return data. Benefit: optimize reads and writes independently. Common mistake: applying CQRS everywhere — it adds significant complexity; use only where read/write patterns diverge significantly.
+
+What is Event Sourcing?	Instead of storing the current state of an entity, store the full sequence of events that led to that state. Example: instead of saving `balance = 100`, save `deposited 200`, `withdrew 100`. Benefits: full audit log, ability to replay events, reconstruct state at any point in time. Often paired with CQRS. Downside: querying current state requires replaying events (mitigated with snapshots).
+
+What are the main Data Architecture patterns?	1. Relational (RDBMS) — structured data with ACID. 2. Document (MongoDB) — flexible JSON docs. 3. Key-Value (Redis) — fast lookups. 4. Column-family (Cassandra) — wide-column, time-series friendly. 5. Graph (Neo4j) — relationships. 6. Time-series (InfluxDB). 7. Search (Elasticsearch). Senior rule: choose the DB for the access pattern, not familiarity.
+
+What is the difference between OLTP and OLAP?	OLTP (Online Transaction Processing): optimized for many small reads/writes in real-time. Example: user placing an order. OLAP (Online Analytical Processing): optimized for complex queries over large datasets. Example: sales report for the last 5 years. Use different databases for each — mixing them degrades both. Solution: ETL data into a data warehouse for analytics.
+
+What is a Data Warehouse?	A centralized repository of structured data optimized for analytical queries. Data is typically denormalized for query performance. Examples: Amazon Redshift, Google BigQuery, Snowflake. Data flows from OLTP systems via ETL (Extract, Transform, Load) pipelines. Contrast with a Data Lake.
+
+What is a Data Lake?	A storage system that holds raw data in its native format (structured, semi-structured, unstructured) at scale. Unlike a warehouse, data is not transformed before storing. Examples: AWS S3 + Athena, Azure Data Lake. Benefit: flexibility. Risk: becomes a "data swamp" without proper governance and cataloguing.
+
+What is the Lakehouse pattern?	Combines the flexibility of a Data Lake with the structure and ACID guarantees of a Data Warehouse in a single platform. Examples: Databricks Delta Lake, Apache Iceberg, Apache Hudi. Allows SQL analytics directly on raw storage while supporting updates/deletes.
+
+What is Database Sharding?	Horizontally partitioning a database by splitting data across multiple database instances (shards), each holding a subset of rows. Example: users with ID 1–1M on shard 1, 1M–2M on shard 2. Enables horizontal scaling. Challenges: cross-shard queries are expensive, resharding is painful, data consistency gets harder.
+
+What is the difference between vertical and horizontal partitioning?	Vertical partitioning: split a table by columns (e.g., move rarely used columns to a separate table). Horizontal partitioning (sharding): split by rows (e.g., users A–M on one server, N–Z on another). Both reduce table size and improve query performance for specific access patterns.
+
+What is the Read Replica pattern?	Copies of the primary database that serve read traffic, reducing load on the primary. Writes go to primary, which replicates to replicas. Benefit: scale read-heavy workloads cheaply. Trade-off: replication lag — replicas may be slightly behind. Don't use replicas for reads that must be current (e.g., "did my payment go through?").
+
+What is Database Federation?	Splitting a single monolithic database into multiple databases each serving a specific domain (e.g., users DB, orders DB, inventory DB). Reduces coupling between domains and allows independent scaling. Downside: cross-domain joins now require application-level aggregation.
+
+What is a Polyglot Persistence architecture?	Using multiple, different database technologies in the same application, each chosen for its strength. Example: PostgreSQL for transactions, Redis for caching, Elasticsearch for search, Cassandra for time-series. The right DB for the right job. Challenge: data consistency across stores and added operational complexity.
+
+What is the Repository pattern and how does it relate to data architecture?	An abstraction layer between business logic and the data store. Business logic calls the repository interface; the implementation handles the actual DB query. Benefit: you can swap databases or add caching without changing business code. Common in DDD and clean architecture. In C#: `IUserRepository` with `SqlUserRepository` and `InMemoryUserRepository` implementations.
+
+What is a Materialized View and when should you use it?	A precomputed, stored query result that is updated periodically or on change. Unlike a regular view (computed at query time), a materialized view stores the result. Use when a complex query is run frequently and the data can tolerate slight staleness. Example: summary reports, dashboards. Supported natively in PostgreSQL, SQL Server, Oracle.
+
+What is Data Normalization vs Denormalization?	Normalization: eliminate redundancy by breaking data into related tables (3NF, BCNF). Good for write-heavy OLTP. Denormalization: intentionally duplicate data for faster reads. Good for read-heavy OLAP or high-throughput APIs. Senior insight: over-normalization in APIs causes N+1 query problems; over-denormalization makes writes complex and data inconsistent.
+
+What is the N+1 Query Problem?	A performance anti-pattern where you fetch a list of N items, then make N additional queries to fetch related data for each. Example: load 100 orders, then load each order's customer with a separate query = 101 queries. Fix: use JOIN, eager loading (`.Include()` in EF Core, `.eager_load()` in ActiveRecord), or batch loading (DataLoader in GraphQL).
+
+What is a Cache-Aside pattern?	Application checks the cache first. If miss, load from DB, store in cache, return data. On write, invalidate or update cache. The app controls caching logic. Most common caching pattern. Used with Redis, Memcached. Key challenge: cache invalidation ("one of the hardest problems in CS").
+
+What is the Write-Through vs Write-Behind caching pattern?	Write-Through: write to cache and DB simultaneously. Cache is always in sync, but writes are slower. Write-Behind (Write-Back): write to cache immediately, sync to DB asynchronously later. Faster writes, but risk of data loss if cache fails before DB sync. Use Write-Through for critical data, Write-Behind for high-throughput non-critical writes.
+
+What is Integration Architecture?	The discipline of connecting different systems, applications, or services so they can share data and functionality. Integration patterns solve the "how do systems talk to each other?" problem across organizational and technical boundaries.
+
+What is the difference between Point-to-Point and Hub-and-Spoke integration?	Point-to-Point: each system connects directly to every other system it needs. Simple for 2–3 systems but becomes a tangled web (spaghetti integration) as systems grow. Hub-and-Spoke: all systems connect to a central hub (ESB or broker) which routes messages. Easier to manage but the hub is a single point of failure and bottleneck.
+
+What is an Enterprise Service Bus (ESB)?	A centralized middleware platform that handles routing, transformation, orchestration, and protocol mediation between systems. Popular in the 2000s (TIBCO, MuleSoft, IBM MQ). Heavy and complex. Modern trend: replace ESBs with lightweight message brokers and API gateways. "Smart pipes, dumb endpoints" vs ESB's "smart pipes, dumb endpoints" anti-pattern.
+
+What is the Publish-Subscribe (Pub/Sub) pattern?	Producers publish events to a topic/channel without knowing who the consumers are. Consumers subscribe to topics they care about and receive events. Decouples producers from consumers completely. Example: an "order placed" event is published once; inventory, email, and shipping services all consume it independently. Used in Kafka, SNS, Google Pub/Sub.
+
+What is the difference between events, commands, and queries in integration?	Command: tells a service to do something. Expects a single recipient and often a response. ("ProcessPayment"). Query: asks for data. Expects a response. ("GetOrderStatus"). Event: announces something that happened. No expectation of response, multiple consumers possible. ("OrderPlaced"). Senior rule: events decouple, commands couple — prefer events between bounded contexts.
+
+What is the Message Envelope pattern?	Wrapping a message payload in a standardized envelope containing metadata: message ID, type, timestamp, correlation ID, sender, version. Enables routing, tracing, and versioning without parsing the payload. Example: Kafka message headers, CloudEvents spec. Always include a correlation ID for distributed tracing.
+
+What is the Correlation ID pattern?	A unique identifier attached to a request that flows through every service in the chain. Enables tracing a request end-to-end across distributed logs. Example: an HTTP request generates a UUID, passed as a header (`X-Correlation-ID`) to every downstream service call and logged everywhere. Essential for debugging microservices.
+
+What is Message Transformation / Data Mapping in integration?	Translating messages from one format or schema to another as they pass through an integration layer. Example: system A sends XML, system B expects JSON — the integration layer transforms it. Tools: MuleSoft, Apache Camel, custom code. Key principle: transform at the boundary, not inside business services.
+
+What is the Dead Letter Queue (DLQ)?	A special queue where messages that cannot be processed (after retries) are sent instead of being discarded. Prevents message loss and allows inspection/reprocessing of failed messages. Every production message queue should have a DLQ with alerting. Common mistake: ignoring the DLQ — messages pile up silently.
+
+What is the Competing Consumers pattern?	Multiple consumer instances read from the same queue in parallel to scale message processing. Each message is delivered to only one consumer. Enables horizontal scaling of consumers. Example: 10 worker instances processing jobs from a single job queue. Used with SQS, RabbitMQ. Key concern: ensure consumers are stateless and idempotent.
+
+What is the Request-Reply pattern in messaging?	Simulating synchronous request/response over an asynchronous messaging system. The requester sends a message with a `reply-to` queue and correlation ID. The responder sends the reply to that queue. Useful when you need async messaging but need a response. More complex than direct REST calls — use only when needed for decoupling.
+
+What is the Aggregator pattern?	Collects and combines multiple related messages or responses into a single aggregated message. Example: collect results from 5 microservices and combine them into one response for the client. Common in scatter-gather workflows. Challenge: handling timeouts (what if one service never responds?).
+
+What is the Scatter-Gather pattern?	Send a request to multiple services simultaneously (scatter), collect all responses, and aggregate them (gather). Used for parallelizing work or getting data from multiple sources. Example: price comparison — query 10 suppliers at once and return the best price. Timeout handling is critical.
+
+What is the Splitter pattern?	Takes a single message containing multiple items and splits it into individual messages for separate processing. Example: a batch order file with 1000 orders is split into 1000 individual order messages. Opposite of the Aggregator. Often used with an Aggregator downstream to recombine results.
+
+What is the Content-Based Router pattern?	Routes messages to different destinations based on the content of the message (not just the topic). Example: route order messages to different fulfillment centers based on the shipping region in the payload. Implemented in message routers, ESBs, or rule engines. Avoid putting too much routing logic in one place — can become a maintenance burden.
+
+What is REST and when should you use it?	REST (Representational State Transfer) is an architectural style for HTTP APIs using resources (URLs), standard verbs (GET, POST, PUT, DELETE), and stateless requests. Best for: public APIs, CRUD-heavy services, browser-friendly interfaces. Limitations: over-fetching/under-fetching, not ideal for real-time or complex queries.
+
+What is gRPC and when should you use it?	A high-performance RPC framework using Protocol Buffers (binary serialization) over HTTP/2. Supports streaming, bi-directional communication, and strong typing. Best for: internal service-to-service communication where performance matters. Not natively browser-friendly. Common in microservices and mobile backends. Contrast: REST is human-readable, gRPC is faster but harder to debug.
+
+What is GraphQL and when should you use it?	A query language for APIs where the client specifies exactly what data it needs. Eliminates over-fetching and under-fetching. Single endpoint (`/graphql`). Best for: complex, nested data (product catalogs, social graphs), mobile apps where bandwidth matters. Downsides: complex caching, N+1 problem needs DataLoader, learning curve.
+
+What is WebSocket and when should you use it?	A protocol providing full-duplex (two-way) persistent connection between client and server. Unlike HTTP, the server can push data without the client asking. Use cases: real-time chat, live dashboards, collaborative editing, stock tickers. Not suitable for simple request-response APIs — adds overhead.
+
+What is Server-Sent Events (SSE)?	A one-way persistent connection from server to client over HTTP. Server pushes updates to the client as they happen. Simpler than WebSockets for one-way streaming. Use cases: live feeds, progress updates, notifications. Limitation: client-to-server is still regular HTTP requests.
+
+What is the difference between REST and Webhooks?	REST: client polls the server asking "any updates?" Webhook: server calls the client when an event happens (push model). Webhooks are more efficient for event-driven integrations — no wasted polling. Example: GitHub calls your webhook URL when a PR is opened. Challenge: your webhook endpoint must be publicly accessible and handle retries.
+
+What is the OpenAPI / Swagger specification?	A standard, machine-readable definition of a REST API (endpoints, parameters, request/response schemas, auth). Enables auto-generating client SDKs, documentation, and server stubs. Tools: Swagger UI, Redoc, NSwag, OpenAPI Generator. Senior advice: design API-first — write the OpenAPI spec before implementing, use it as the contract.
+
+What is an API versioning strategy?	Approach to managing breaking changes in APIs without breaking existing clients. Strategies: 1. URL versioning (`/v1/users`). 2. Header versioning (`Accept: application/vnd.api+json;version=2`). 3. Query param (`?version=2`). URL versioning is most visible and commonly used. Key rule: never make breaking changes without a version bump.
+
+What is the Strangler Fig pattern in the context of integration?	Gradually replace legacy system integrations by routing traffic to new services while the legacy system still runs. New integrations point to the new service; legacy integrations are slowly migrated. The legacy system is eventually "strangled" as all integrations move to the new system.
+
+What is the Anti-Corruption Layer (ACL)?	A translation layer between your system and an external or legacy system that has a different domain model. Prevents the external system's messy model from leaking into your clean domain. Example: wrapping a legacy SOAP service with a clean REST adapter. Term from Domain-Driven Design.
+
+What is the difference between Orchestration and Choreography in integration?	Orchestration: one central service (orchestrator) controls the flow, calling services in sequence and handling responses. Easy to understand, harder to scale. Choreography: services react to events published by others — no central controller. More decoupled and scalable, but harder to trace and debug. Neither is universally better — choose based on complexity and team size.
+
+What is a Canonical Data Model?	A common, shared data format used across all integrations within an organization. All systems translate to/from this canonical format at their boundaries. Prevents every system needing to know every other system's format. Used heavily in ESB/EAI (Enterprise Application Integration). Downside: the canonical model becomes complex and hard to evolve.
+
+What is the difference between synchronous REST and asynchronous event-driven integration?	Synchronous REST: caller waits for a response. Tight temporal coupling (both must be up at the same time). Simple to implement and reason about. Async events: caller publishes an event and doesn't wait. Temporal decoupling (consumer can process later). More resilient, but harder to trace and requires eventual consistency. Use async for cross-domain integration where reliability matters more than immediacy.
+
+What is rate limiting and why is it essential in API integration?	Limits the number of requests a client can make in a time window (e.g., 1000 requests/min). Protects the API from abuse, DDoS, and runaway clients. Implemented at the API Gateway. Response: HTTP 429 Too Many Requests with `Retry-After` header. Client-side: implement exponential backoff with jitter when hitting rate limits.
+
+What is exponential backoff with jitter?	A retry strategy where each retry waits progressively longer, with added randomness (jitter) to prevent thundering herd. Example: retry after 1s, 2s, 4s, 8s + random offset. Without jitter, all clients retry at the same time, overloading the server again. Standard pattern in AWS SDKs, gRPC, and modern HTTP clients.
+
+What is the Throttling pattern?	Controls the rate at which a service processes requests — not just rejects them, but queues or delays excess requests. Different from rate limiting (which rejects). Prevents downstream services from being overwhelmed. Used in API gateways, message queue consumers, and batch processors.
+
+What is the Retry pattern and what pitfalls should you avoid?	Automatically retry failed operations to handle transient failures. Pitfalls: 1. Retrying non-idempotent operations (double-charging). 2. Retrying on non-transient errors (e.g., 400 Bad Request — no point retrying). 3. No backoff — instant retries make things worse. Always combine with circuit breaker and idempotency.
+
+What is an Integration Test vs a Contract Test?	Integration test: tests real interaction between two systems (slow, environment-heavy). Contract test: verifies that a service meets a specific API contract expected by a consumer, without running the full stack. Tools: Pact (consumer-driven contract testing). Faster and more targeted. Essential for microservices where teams own different services.
+
+What are common performance pitfalls in distributed architectures (C#, JS, Python)?	C#: blocking async calls (`result.Wait()`), not using `ConfigureAwait(false)`, EF Core N+1. JavaScript: blocking the event loop with sync CPU work, not batching DB calls, no connection pooling. Python: GIL limits threading for CPU-bound work — use multiprocessing or async; unclosed DB connections. Universal: no connection pooling, chatty services (too many small calls), no caching, synchronous calls in hot paths.
+
+What is the difference between latency and throughput?	Latency: time for one request to complete (ms). Throughput: how many requests/operations the system handles per second. You can have high throughput with high latency (batch processing) or low latency with low throughput. Senior rule: optimizing for one can hurt the other — e.g., batching improves throughput but increases per-item latency. Always measure both.
+
+What is the Sidecar vs Ambassador vs Adapter container pattern?	Sidecar: helper container running alongside the main container (e.g., log shipper, proxy). Ambassador: sidecar that proxies outbound connections from the main container (e.g., handles service discovery). Adapter: sidecar that transforms the main container's output to a standard format (e.g., metrics exporter). All are variants of attaching helpers without modifying the main app.
+
+What is observability in distributed systems and what are its three pillars?	Observability is the ability to understand the internal state of a system from its external outputs. Three pillars: 1. Logs — timestamped records of events. 2. Metrics — numeric measurements over time (CPU, request rate, error rate). 3. Traces — end-to-end tracking of a request across services. All three are needed together. Tools: OpenTelemetry, Jaeger, Prometheus, Grafana, Datadog.
+
+What is a health check endpoint and why is it important in integration?	A simple API endpoint (`/health` or `/ping`) that reports whether the service is running and ready to accept traffic. Used by load balancers, orchestrators (Kubernetes), and monitoring systems. Two types: liveness (is the process alive?) and readiness (is it ready to serve traffic? — e.g., DB connected). Missing health checks = blind spots in production.
+
+What is the difference between a monorepo and a polyrepo in distributed systems?	Monorepo: all services in one repository. Benefits: atomic commits across services, easier refactoring, shared tooling. Challenges: complex CI, build times, ownership. Polyrepo: each service has its own repo. Benefits: clear ownership, independent pipelines. Challenges: dependency management across repos, harder cross-service refactors. Neither is universally better — Conway's Law applies: your repo structure mirrors your org structure.

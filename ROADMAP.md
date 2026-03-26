@@ -126,7 +126,7 @@
 ### 4.2 Distributed Architecture
 - [ ] Microservices Architecture
 - [✅] Service-Oriented Architecture (SOA)
-- [ ] Event-Driven Architecture (EDA)
+- [✅] Event-Driven Architecture (EDA)
 - [ ] Space-Based Architecture
 - [ ] Serverless Architecture
 
